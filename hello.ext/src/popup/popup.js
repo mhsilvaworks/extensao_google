@@ -1,7 +1,20 @@
-// Encontra o botão pelo ID que você definiu no HTML
-const botaoOi = document.getElementById('oi');
 
-// Adiciona um "ouvinte" que espera por um clique no botão
-botaoOi.addEventListener('click', () => {
-    alert('Olá! Você clicou no botão!');
+const comunicarBtn = document.getElementById('comunicar');
+const statusEl = document.getElementById('status');
+
+
+comunicarBtn.addEventListener('click', () => {
+  statusEl.textContent = 'Enviando PING...';
+
+
+  chrome.runtime.sendMessage({ type: 'PING' }, (response) => {
+    if (chrome.runtime.lastError) {
+  
+        statusEl.textContent = 'Erro: ' + chrome.runtime.lastError.message;
+    } else {
+     
+        console.log('Popup recebeu a resposta:', response);
+        statusEl.textContent = response.text;
+    }
+  });
 });
