@@ -2,16 +2,51 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="popup.css">
-    <title>Popup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/bootstrap.min.css">
+    <style>
+      body { 
+        width: 350px; 
+        background-color: transparent; 
+        font-family: 'Courier New', Courier, monospace;
+      }
+      .main-container { 
+        width: 100%;
+        border-width: 2px !important;
+      }
+      .list-group-item {
+        background-color: #343a40; /* Um pouco mais claro que o fundo */
+        border-color: #495057;
+      }
+      .status { font-weight: bold; }
+      .status-pending { color: #ffc107; } /* Amarelo */
+      .status-checking { color: #0dcaf0; } /* Ciano (Azul claro) */
+      .status-online { color: #198754; }  /* Verde */
+    </style>
+    <title>Diagnóstico da Nave</title>
 </head>
-<body>
-    <h1>Olá, Mundo!!</h1>
-    <p>Teste de comunicação:</p>
-    
-    <button id="comunicar">Enviar PING para o Service Worker</button>
+<body class="text-light">
 
-    <p id="status">Aguardando...</p>
+    <div class="main-container bg-dark p-3 rounded shadow border border-info">
+        <h3 class="mb-3 text-info">DIAGNÓSTICO DE SISTEMAS</h3>
+        
+        <button id="iniciarDiagnostico" class="btn btn-outline-info w-100 fw-bold mb-3">
+          INICIAR DIAGNÓSTICO
+        </button>
+
+        <ul id="listaSistemas" class="list-group text-start">
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Turbina 1<span id="status-turbina-1" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Turbina 2<span id="status-turbina-2" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Turbina 3<span id="status-turbina-3" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Turbina 4<span id="status-turbina-4" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Escudos<span id="status-escudos" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Navegação<span id="status-navegacao" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Suporte de Vida<span id="status-suporte-vida" class="status"></span></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center text-light">Comunicações<span id="status-comunicacoes" class="status"></span></li>
+        </ul>
+
+        <div id="status-geral" class="alert mt-3" role="alert"></div>
+    </div>
 
     <script src="popup.js"></script>
 </body>
