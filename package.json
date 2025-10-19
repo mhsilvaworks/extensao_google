@@ -1,0 +1,30 @@
+{
+  "name": "extensao_google",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "node scripts/build-extension.mjs",
+    "test:e2e": "playwright test",
+    "test": "npm run build && npm run test:e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhsilvaworks/extensao_google.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhsilvaworks/extensao_google/issues"
+  },
+  "homepage": "https://github.com/mhsilvaworks/extensao_google#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.46.0",
+    "archiver": "^7.0.1"
+  }
+}
