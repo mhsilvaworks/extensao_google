@@ -1,0 +1,46 @@
+name: CI # Nome do nosso workflow
+
+on:
+  push:
+    branches: [ main ] # Executa quando houver um push na branch 'main'
+  pull_request:
+    branches: [ main ] # Executa também em pull requests para a 'main'
+
+jobs:
+  test-build: # Nome do nosso "trabalho"
+    runs-on: ubuntu-latest # A máquina virtual que o GitHub vai usar
+
+    steps: # A sequência de passos a executar
+      - name: 1. Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar o ambiente Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 3. Instalar as dependências do projeto
+        run: npm ci
+
+      - name: 4. Instalar os navegadores do Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: 5. Construir a extensão (Build)
+        run: npm run build
+
+      - name: 6. Executar os testes E2E com Playwright
+        run: npm run test:e2e
+
+      - name: 7. Publicar o Relatório de Testes
+        if: always() # Executa este passo mesmo que os testes falhem
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report # Nome do artefato
+          path: playwright-report/ # Pasta a ser salva
+
+      - name: 8. Publicar o Pacote da Extensão (.zip)
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-package # Nome do artefato
+          path: dist/extension.zip # Arquivo a ser salvo
