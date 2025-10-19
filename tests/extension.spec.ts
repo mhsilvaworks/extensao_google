@@ -1,12 +1,16 @@
 // tests/extension.spec.ts
-
 import { test, expect } from '@playwright/test';
 
-// Este teste simples prova que o Playwright, dentro do Docker, funciona.
-test('Abre a página do Google e verifica o título', async ({ page }) => {
-  // 1. Navega para um site conhecido
-  await page.goto('https://www.google.com');
+test('Popup da extensão abre e tem o título correto', async ({ context }) => {
+  
+  const page = await context.newPage();
+  await page.goto('about:blank');
+  const serviceWorker = await context.waitForEvent('serviceworker');
+  expect(serviceWorker).toBeDefined();
 
-  // 2. Verifica se o título da página é o esperado.
-  await expect(page).toHaveTitle('Google');
+  const extensionId = new URL(serviceWorker.url()).hostname;
+
+  await page.goto(`chrome-extension://${extensionId}/src/popup/popup.html`);
+
+  await expect(page).toHaveTitle('Diagnóstico da Nave');
 });
