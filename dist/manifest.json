@@ -18,9 +18,12 @@
     },
     "content_scripts": [
         {
-          "matches": ["https://developer.chrome.com/*"],
+          "matches": ["*://*.example.com/*"],
           "js": ["src/content/content.js"],
           "run_at": "document_start"
         }
+    ],
+    "host_permissions": [
+        "*://*.example.com/*"
     ]
 }
