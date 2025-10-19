@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "node scripts/build-extension.mjs",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --reporter=html",
     "test": "npm run build && npm run test:e2e"
   },
   "repository": {

@@ -9,7 +9,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: true, // Essencial para rodar no Docker
+        headless: true, 
       },
     },
   ],

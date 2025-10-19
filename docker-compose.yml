@@ -8,4 +8,4 @@ services:
       - ./:/app
     working_dir: /app
     command: npm run test
-    shm_size: 2gb # Evita falhas do Chromium por falta de memória compartilhada
+    shm_size: 2gb 
